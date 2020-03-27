@@ -1,26 +1,37 @@
 import 'package:flutter/material.dart';
+import 'extensions/hover.dart';
+import 'trips.dart';
 
-Widget getNavbar() {
+enum opts { Trips, AboutUs }
+
+Widget getNavbar(BuildContext context) {
   return Row(
     children: <Widget>[
       Padding(
-        padding: const EdgeInsets.only(top: 25.0, left: 80, right: 60),
+        padding: EdgeInsets.only(
+            top: MediaQuery.of(context).size.height / 26.28,
+            left: MediaQuery.of(context).size.width / 17.075,
+            right: MediaQuery.of(context).size.width / 22.76),
         child: Icon(
           Icons.ac_unit,
           color: Colors.white,
-          size: 35,
+          size: MediaQuery.of(context).size.width / 39.02,
         ),
       ),
       Padding(
-        padding: EdgeInsets.only(top: 20, right: 40),
+        padding: EdgeInsets.only(
+            top: MediaQuery.of(context).size.height / 33,
+            right: MediaQuery.of(context).size.width / 34.15),
         child: Container(
-          height: 2,
-          width: 850,
+          height: MediaQuery.of(context).size.height / 328.5,
+          width: MediaQuery.of(context).size.width / 1.607,
           color: Colors.white,
         ),
       ),
       Padding(
-        padding: const EdgeInsets.only(top: 15.0, right: 20),
+        padding: EdgeInsets.only(
+            top: MediaQuery.of(context).size.height / 43.8,
+            right: MediaQuery.of(context).size.width / 68.3),
         child: DropdownButton<String>(
           focusColor: Colors.white,
           items: <String>['EN', 'HN', 'BN', 'DE'].map((String value) {
@@ -34,7 +45,8 @@ Widget getNavbar() {
         ),
       ),
       Padding(
-        padding: const EdgeInsets.only(top: 15.0),
+        padding:
+            EdgeInsets.only(top: MediaQuery.of(context).size.height / 43.8),
         child: Container(
           width: 1.5,
           height: 40,
@@ -42,29 +54,54 @@ Widget getNavbar() {
         ),
       ),
       Padding(
-        padding: const EdgeInsets.only(left: 18.0, top: 20, right: 18),
+        padding: EdgeInsets.only(
+            left: MediaQuery.of(context).size.width / 75.88,
+            top: MediaQuery.of(context).size.height / 32.85,
+            right: MediaQuery.of(context).size.width / 75.88),
         child: Icon(
           Icons.search,
           color: Colors.black54,
-          size: 35,
+          size: MediaQuery.of(context).size.width / 39.02,
         ),
       ),
       Padding(
-        padding: const EdgeInsets.only(top: 15.0),
+        padding: EdgeInsets.only(top: MediaQuery.of(context).size.width / 43.8),
         child: Container(
-          width: 1.5,
-          height: 40,
+          width: MediaQuery.of(context).size.width / 911,
+          height: MediaQuery.of(context).size.height / 16.43,
           color: Colors.black54,
         ),
       ),
       Padding(
-        padding: const EdgeInsets.only(left: 25.0),
-        child: Text(
-          '...',
-          style: TextStyle(
-              color: Colors.white, fontSize: 35, fontWeight: FontWeight.bold),
+        padding:
+            EdgeInsets.only(left: MediaQuery.of(context).size.width / 54.64),
+        child: PopupMenuButton<opts>(
+          onSelected: (opts o) {
+            print('selected item is $o');
+            if (o == opts.Trips) {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => TripPage()));
+            }
+          },
+          child: Text(
+            '...',
+            style: TextStyle(
+                color: Colors.white,
+                fontSize: MediaQuery.of(context).size.width / 39.02,
+                fontWeight: FontWeight.bold),
+          ),
+          itemBuilder: (BuildContext context) => <PopupMenuEntry<opts>>[
+            const PopupMenuItem<opts>(
+              value: opts.Trips,
+              child: Text('Our Trips'),
+            ),
+            const PopupMenuItem<opts>(
+              value: opts.AboutUs,
+              child: Text('About Us'),
+            ),
+          ],
         ),
       )
     ],
-  );
+  ).showCursorOnHover;
 }

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'navbar.dart';
 import 'package:flare_flutter/flare_actor.dart';
+import 'extensions/hover.dart';
+import 'trips.dart';
 
 class Page1 extends StatefulWidget {
   String heading1;
@@ -107,109 +109,130 @@ class _Page1State extends State<Page1> with TickerProviderStateMixin {
         ),
         Column(
           children: <Widget>[
-            getNavbar(),
+            getNavbar(context),
             Row(
               children: <Widget>[
                 Column(
                   children: <Widget>[
                     Padding(
-                      padding: const EdgeInsets.only(left: 80.0, top: 20),
+                      padding: EdgeInsets.only(
+                          left: MediaQuery.of(context).size.width / 17,
+                          top: MediaQuery.of(context).size.height / 32.5),
                       child: Text(
                         widget.heading1,
                         style: TextStyle(
                             fontFamily: 'JosefinSans',
                             color: widget.textCol,
-                            fontSize: 70,
+                            fontSize: MediaQuery.of(context).size.width / 16.4,
                             fontWeight: FontWeight.bold),
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(left: 80.0, top: 10),
+                      padding: EdgeInsets.only(
+                          left: MediaQuery.of(context).size.width / 17,
+                          top: MediaQuery.of(context).size.height / 65.7),
                       child: Text(
                         '${widget.heading2}     ',
                         style: TextStyle(
                             fontFamily: 'JosefinSans',
                             color: widget.textCol,
-                            fontSize: 70,
+                            fontSize: MediaQuery.of(context).size.width / 16.8,
                             fontWeight: FontWeight.bold),
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.only(top: 20, right: 120),
-                      child: RaisedButton(
-                        onPressed: () {},
-                        child: Text(
-                          'EXPLORE NOW',
-                          style: TextStyle(
-                              fontFamily: 'JosefinSans',
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold),
+                      padding: EdgeInsets.only(
+                          top: MediaQuery.of(context).size.height / 68,
+                          right: MediaQuery.of(context).size.width / 7.41),
+                      child: Container(
+                        width: MediaQuery.of(context).size.width / 8.035,
+                        height: MediaQuery.of(context).size.height / 16.42,
+                        child: showButtonAsCursor(
+                          RaisedButton(
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => TripPage(),
+                                ),
+                              );
+                            },
+                            child: Text(
+                              'EXPLORE',
+                              style: TextStyle(
+                                  fontFamily: 'JosefinSans',
+                                  color: Colors.white,
+                                  fontSize:
+                                      MediaQuery.of(context).size.width / 80,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            color: widget.btnCol,
+                          ),
                         ),
-                        color: widget.btnCol,
                       ),
                     )
                   ],
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(left: 50.0, bottom: 150),
+                  padding: EdgeInsets.only(
+                      left: MediaQuery.of(context).size.width / 54,
+                      bottom: MediaQuery.of(context).size.height / 5.10),
                   child: Column(
                     children: <Widget>[
                       Text(
                         '${widget.dir1}/',
                         style: TextStyle(
                             fontFamily: 'JosefinSans',
-                            fontSize: 18,
+                            fontSize: MediaQuery.of(context).size.width / 60,
                             color: widget.textCol),
                       ),
                       Text(
-                        '          ${widget.dir11}',
+                        '       ${widget.dir11}',
                         style: TextStyle(
                             fontFamily: 'JosefinSans',
-                            fontSize: 18,
+                            fontSize: MediaQuery.of(context).size.width / 60,
                             color: widget.textCol),
                       ),
                     ],
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 10.0),
-                  child: Opacity(
-                    opacity: widget.routeOpa,
-                    child: Container(
-                      width: 300,
-                      height: 200,
-                      color: Colors.white10.withOpacity(0),
-                      child: FlareActor(
-                        'assets/travel.flr',
-                        animation: widget.anim,
-                      ),
+                Opacity(
+                  opacity: widget.routeOpa,
+                  child: Container(
+                    width: MediaQuery.of(context).size.width / 6.19,
+                    height: MediaQuery.of(context).size.height / 1.83,
+                    color: Colors.white10.withOpacity(0),
+                    child: FlareActor(
+                      'assets/travel.flr',
+                      animation: widget.anim,
                     ),
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 150.0),
+                  padding: EdgeInsets.only(
+                    top: MediaQuery.of(context).size.height / 7.10,
+                  ),
                   child: Column(
                     children: <Widget>[
                       Text(
-                        '${widget.dir2}/                     ',
+                        '${widget.dir2}/                    ',
                         style: TextStyle(
                             fontFamily: 'JosefinSans',
-                            fontSize: 18,
+                            fontSize: MediaQuery.of(context).size.width / 60,
                             color: widget.textCol),
                       ),
                       Text(
                         widget.dir22,
                         style: TextStyle(
                             fontFamily: 'JosefinSans',
-                            fontSize: 18,
+                            fontSize: MediaQuery.of(context).size.width / 60,
                             color: widget.textCol),
                       ),
                       SizedBox(
-                        height: 10,
-                      ),
+                          height: MediaQuery.of(context).size.height / 6.6),
                       Container(
-                        width: 200,
-                        height: 35,
+                        width: MediaQuery.of(context).size.width / 4.83,
+                        height: MediaQuery.of(context).size.width / 39.02,
                         child: TabBar(
                             controller: cont,
                             indicatorColor: widget.textCol,
@@ -218,34 +241,38 @@ class _Page1State extends State<Page1> with TickerProviderStateMixin {
                               Tab(
                                 icon: Icon(
                                   Icons.local_taxi,
-                                  size: 20,
+                                  size:
+                                      MediaQuery.of(context).size.width / 68.3,
                                 ),
                               ),
                               Tab(
                                 icon: Icon(
                                   Icons.local_taxi,
-                                  size: 20,
+                                  size:
+                                      MediaQuery.of(context).size.width / 68.3,
                                 ),
                               ),
                               Tab(
                                 // iconMargin: EdgeInsets.only(right: 55),
                                 icon: Icon(
                                   Icons.directions_boat,
-                                  size: 20,
+                                  size:
+                                      MediaQuery.of(context).size.width / 68.3,
                                 ),
                               ),
                               Tab(
                                 // iconMargin: EdgeInsets.only(right: 55),
                                 icon: Icon(
                                   Icons.directions_boat,
-                                  size: 20,
+                                  size:
+                                      MediaQuery.of(context).size.width / 68.3,
                                 ),
                               ),
                             ]),
-                      ),
+                      ).showCursorOnHover,
                       Container(
-                        width: 200,
-                        height: 35,
+                        width: MediaQuery.of(context).size.width / 6.83,
+                        height: MediaQuery.of(context).size.height / 18.77,
                         child: TabBarView(controller: cont, children: [
                           Row(
                             children: <Widget>[
@@ -253,12 +280,14 @@ class _Page1State extends State<Page1> with TickerProviderStateMixin {
                                 '3h 21min(2222Km)   ',
                                 style: TextStyle(
                                     fontFamily: 'JosefinSans',
-                                    fontSize: 15,
+                                    fontSize:
+                                        MediaQuery.of(context).size.width /
+                                            91.06,
                                     color: widget.textCol),
                               ),
                               Icon(
                                 Icons.arrow_forward_ios,
-                                size: 15,
+                                size: MediaQuery.of(context).size.width / 91.06,
                                 color: widget.textCol,
                               )
                             ],
@@ -269,12 +298,14 @@ class _Page1State extends State<Page1> with TickerProviderStateMixin {
                                 '3h 21min(2222Km)   ',
                                 style: TextStyle(
                                     fontFamily: 'JosefinSans',
-                                    fontSize: 15,
+                                    fontSize:
+                                        MediaQuery.of(context).size.width /
+                                            91.06,
                                     color: widget.textCol),
                               ),
                               Icon(
                                 Icons.arrow_forward_ios,
-                                size: 15,
+                                size: MediaQuery.of(context).size.width / 91.06,
                                 color: widget.textCol,
                               )
                             ],
@@ -285,12 +316,14 @@ class _Page1State extends State<Page1> with TickerProviderStateMixin {
                                 '3h 21min(2222Km)   ',
                                 style: TextStyle(
                                     fontFamily: 'JosefinSans',
-                                    fontSize: 15,
+                                    fontSize:
+                                        MediaQuery.of(context).size.width /
+                                            91.06,
                                     color: widget.textCol),
                               ),
                               Icon(
                                 Icons.arrow_forward_ios,
-                                size: 15,
+                                size: MediaQuery.of(context).size.width / 91.06,
                                 color: widget.textCol,
                               )
                             ],
@@ -301,36 +334,44 @@ class _Page1State extends State<Page1> with TickerProviderStateMixin {
                                 '3h 21min(2222Km)   ',
                                 style: TextStyle(
                                     fontFamily: 'JosefinSans',
-                                    fontSize: 15,
+                                    fontSize:
+                                        MediaQuery.of(context).size.width /
+                                            91.06,
                                     color: widget.textCol),
                               ),
                               Icon(
                                 Icons.arrow_forward_ios,
-                                size: 15,
+                                size: MediaQuery.of(context).size.width / 91.06,
                                 color: widget.textCol,
                               )
                             ],
                           ),
                         ]),
-                      )
+                      ).showCursorOnHover,
                     ],
                   ),
                 )
               ],
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 80.0, top: 150),
+              padding: EdgeInsets.only(
+                  left: MediaQuery.of(context).size.width / 17,
+                  top: MediaQuery.of(context).size.height / 6.56),
               child: Row(
                 children: <Widget>[
                   Text(
                     widget.pageNo,
-                    style: TextStyle(color: Colors.white, fontSize: 90),
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: MediaQuery.of(context).size.width / 15.17),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(left: 45, top: 50.0),
+                    padding: EdgeInsets.only(
+                        left: MediaQuery.of(context).size.width / 30.55,
+                        top: MediaQuery.of(context).size.height / 15),
                     child: Container(
-                      height: 4,
-                      width: 800,
+                      height: MediaQuery.of(context).size.height / 164,
+                      width: MediaQuery.of(context).size.width / 1.7075,
                       child: LinearProgressIndicator(
                         backgroundColor: Colors.white30,
                         valueColor: AlwaysStoppedAnimation<Color>(
@@ -341,41 +382,59 @@ class _Page1State extends State<Page1> with TickerProviderStateMixin {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(top: 30.0, left: 10),
-                    child: RaisedButton(
-                      onPressed: () {
+                    padding: EdgeInsets.only(
+                        top: MediaQuery.of(context).size.height / 22.9,
+                        left: MediaQuery.of(context).size.width / 136.6),
+                    child: GestureDetector(
+                      onTap: () {
                         widget.pc.animateToPage(widget.prevPage,
                             duration: Duration(milliseconds: 50),
                             curve: Curves.easeIn);
                       },
-                      child: Center(
-                        child: Icon(
-                          Icons.arrow_back_ios,
-                          color: Colors.black54,
-                          size: 15,
-                        ),
-                      ),
-                      shape: CircleBorder(),
-                      color: Colors.white,
+                      child: Container(
+                          width: MediaQuery.of(context).size.width / 34.15,
+                          height: MediaQuery.of(context).size.height / 16.42,
+                          decoration: BoxDecoration(boxShadow: [
+                            BoxShadow(
+                                color: Colors.black45,
+                                offset: Offset(2, -2),
+                                spreadRadius: -3,
+                                blurRadius: 10),
+                            BoxShadow(
+                                color: Colors.grey.shade600,
+                                offset: Offset(-2, 2),
+                                spreadRadius: -3,
+                                blurRadius: 10)
+                          ], shape: BoxShape.circle, color: Colors.white),
+                          child: Icon(Icons.arrow_back_ios)),
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(top: 30.0),
-                    child: RaisedButton(
-                      onPressed: () {
+                    padding: EdgeInsets.only(
+                        left: 40,
+                        top: MediaQuery.of(context).size.height / 22.9),
+                    child: GestureDetector(
+                      onTap: () {
                         widget.pc.animateToPage(widget.nextPage,
                             duration: Duration(milliseconds: 50),
                             curve: Curves.easeIn);
                       },
-                      child: Center(
-                        child: Icon(
-                          Icons.arrow_forward_ios,
-                          color: Colors.black54,
-                          size: 15,
-                        ),
-                      ),
-                      shape: CircleBorder(),
-                      color: Colors.white,
+                      child: Container(
+                          width: MediaQuery.of(context).size.width / 34.15,
+                          height: MediaQuery.of(context).size.height / 16.42,
+                          decoration: BoxDecoration(boxShadow: [
+                            BoxShadow(
+                                color: Colors.black45,
+                                offset: Offset(2, -2),
+                                spreadRadius: -3,
+                                blurRadius: 10),
+                            BoxShadow(
+                                color: Colors.grey.shade600,
+                                offset: Offset(-2, 2),
+                                spreadRadius: -3,
+                                blurRadius: 10)
+                          ], shape: BoxShape.circle, color: Colors.white),
+                          child: Icon(Icons.arrow_forward_ios)),
                     ),
                   ),
                 ],
